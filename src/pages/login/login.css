@@ -2,17 +2,13 @@
     background-color: var(--color-1c3423);
 }
 
-.login-logo-container{
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 .login-item {
     display: flex;
     flex-direction: column;
     justify-content: end;
     align-items: center;
+    flex: 1;
 }
 
 .login-logo-container{
@@ -51,4 +47,9 @@
 .login-button{
     font-family: var(--font-family);
     color: var(--color-ffffffcc);
+}
+
+.login-modal-title{
+    font-family: var(--font-family);
+    font-size: var(--font-28);
 }
