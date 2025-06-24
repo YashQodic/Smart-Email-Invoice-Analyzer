@@ -1,0 +1,7 @@
+{
+  "name": "InvoicePal",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
