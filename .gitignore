@@ -3,6 +3,10 @@
 android/
 ios/
 
+# Platform folders
+android/
+ios/
+
 # dependencies
 /node_modules
 /.pnp
