@@ -1,15 +1,34 @@
-import { IonButton, IonIcon, IonImg, IonModal, IonPage, IonText } from "@ionic/react";
+import { IonButton, IonIcon, IonImg, IonPage, IonText } from "@ionic/react";
 import "../../common.css";
 import "./login.css"
 import introImg from "../../assets/images/loginTransparentSvg.svg"
-import logo from "../../assets/images/logo.png"
-import { arrowForwardCircle } from "ionicons/icons"
-import { useState } from "react";
+import { logoGoogle } from "ionicons/icons";
+import { useEffect, useState } from "react";
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 const Login: React.FC = () => {
-    const [showModal, setShowModal] = useState(false);
+    const [accessToken, setAccessToken] = useState<any>(null);
+    const [startLogin, setStartLogin] = useState("");
+    useEffect(() => {
+        GoogleAuth.initialize();
+    }, []);
+    const signIn = async () => {
+        try {
+            const result = await GoogleAuth.signIn();
+            setStartLogin("startLogin");
+            console.log('Google Sign-In success:', result);
+            setAccessToken(result.email);
+        } catch (err:any) {
+            console.error('Google Sign-In error:', err);
+            setStartLogin(JSON.stringify(err, null, 2));
+        }
+    };
     return (
         <>
             <IonPage className="login-container login-background-color">
+                <div className="text-white">
+                    {accessToken}
+                    {startLogin}
+                </div>
                 <div className="login-item login-background-color">
                     <div className="login-logo-container">
                         <IonImg src={introImg} className="login-logo" />
@@ -18,26 +37,13 @@ const Login: React.FC = () => {
                         <IonText className="login-subtitle">Let’s scan your Gmail for invoices.</IonText>
                     </div>
                     <div className="login-button-container">
-                        <IonButton onClick={() => {
-                            setShowModal(true)
-                        }} expand="block" className="login-button">
-                            Get Started
-                            <IonIcon icon={arrowForwardCircle} slot="end" color="white" size="medium"></IonIcon>
+                        <IonButton expand="block" className="login-button"  onClick={signIn} >
+                            <IonIcon icon={logoGoogle} size="medium" slot="start" ></IonIcon>
+                            Google Login
                         </IonButton>
                     </div>
                 </div>
             </IonPage>
-            <IonModal
-                isOpen={showModal}
-                onDidDismiss={() => setShowModal(false)}
-                breakpoints={[0, 0.5, 0.8]}
-                initialBreakpoint={0.3}
-                handleBehavior="cycle"
-            >
-                <div style={{ padding: 20 }}>
-                    <h2 className="login-modal-title">Login</h2>
-                </div>
-            </IonModal>
         </>
     )
 }

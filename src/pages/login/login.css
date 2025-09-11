@@ -53,3 +53,19 @@
     font-family: var(--font-family);
     font-size: var(--font-28);
 }
+
+.login-modal-container>.ion-page{
+    background-color: var(--color-F7F9FC) !important;
+}
+
+.login-modal{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+}
+
+.text-white{
+    color: var(--color-ffffffcc);
+}
